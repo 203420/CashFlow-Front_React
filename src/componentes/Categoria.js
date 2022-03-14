@@ -1,8 +1,28 @@
+import axios from "axios";
 import { NavLink } from "react-router-dom";
 import '../estilos/Main.css'
 import Menu from '../img/menu.png'
 
 function App() {
+
+    const registrar_categoria = () =>{
+        var postData = {
+            clasificacion: document.getElementById("select").value,
+            categoria: document.getElementById("inputCategoria").value,
+            subcategoria: document.getElementById("inputSubcategoria").value,   
+        }
+
+        axios.post("http://localhost:8000/cashflow/categorias/list",postData,{
+            Headers: { "Content-Type": "application/json", 'Token ': localStorage.getItem('token'),
+        },  
+        })
+        .then((response) => {
+            console.log(response.data)
+        })
+        .catch((error) => {
+            console.log(error.response.data)
+        })
+    }
 
     const mostrar_nav = () =>{
         document.getElementById('navMain').style.display = "block"
@@ -47,11 +67,11 @@ function App() {
 
                     <div className="input">
                         <input type="text" className="input-fieldMain" required />
-                        <label className="input-label">Categoria</label>
+                        <label className="input-label" id="inputCategoria">Categoria</label>
                     </div>
                     <div className="input">
                         <input type="text" className="input-fieldMain" required />
-                        <label className="input-label">Subcategoria</label>
+                        <label className="input-label" id="inputSubcategoria">Subcategoria</label>
                     </div>
                     <div className="action">
                         <button className="action-button">Guardar</button>

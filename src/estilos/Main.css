@@ -42,6 +42,8 @@ body{
 
     position: fixed;
     text-align: center;
+    -webkit-transition: 0.8s;
+    transition: 0.8s ease;
     width: 40%;
     z-index: 10;
 }
