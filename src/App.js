@@ -1,24 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter as Router, Route, NavLink,  Routes, BrowserRouter } from "react-router-dom";
+import Login from './componentes/Login'
+import Register from './componentes/Register'
+import Menu from './componentes/Menu'
+import Categoria from './componentes/Categoria'
+import Flujo from './componentes/Flujo'
+import Indicadores from './componentes/Indicadores'
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+    <BrowserRouter>
+        <Routes>
+            <Route exact path="/" element={<Login/>}/>
+            <Route exact path="/registro" element={<Register/>}/>
+            <Route exact path="/menu" element={<Menu/>}/>
+            <Route exact path="/categorias" element={<Categoria/>}/>
+            <Route exact path="/flujo" element={<Flujo/>}/>
+            <Route exact path="/indicadores" element={<Indicadores/>}/>
+        </Routes>
+    </BrowserRouter>      
+    </>
   );
 }
 

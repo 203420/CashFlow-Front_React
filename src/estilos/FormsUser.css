@@ -1,0 +1,152 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;800&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+    list-style: none;
+}
+body{
+    background-color: #fcfcfc;
+}
+.form-boxUser{
+    background-color: #ffffff;
+    height: max-content;
+    top: 8%;
+    text-align: center;
+    padding: 2em;
+    position: absolute;
+}
+
+#title-user{
+    color: #5C62EF;
+    font-weight: 800;
+    margin-bottom: 1em;
+}
+
+.labelUser{
+    display: block;
+    font-weight: 600;
+    margin-bottom: 0.5em;
+    margin-left: 10%;
+    text-align: left;
+}
+#user{
+    background: url('../img/user.png');
+    background-size: 2em;
+    background-position: 0.3em 0.45em;
+    background-repeat: no-repeat;
+    padding-left: 2.8em;
+}
+#email{
+    background: url('../img/mail.png');
+    background-size: 2em;
+    background-position: 0.3em 0.45em;
+    background-repeat: no-repeat;
+    padding-left: 2.8em;
+}
+#passw{
+    background: url('../img/password.png');
+    background-size: 2.25em;
+    background-position: 0.2em 0.3em;
+    background-repeat: no-repeat;
+    padding-left: 2.8em;
+}
+
+.inputUser{
+    border: 1px solid #909090;
+    border-radius: 0.3em;
+    display: inline-block;
+    margin-bottom: 2.5em;
+    width: 80%;
+    height: 3em;
+    outline: none;
+    -webkit-transition: 0.5s;
+    transition: 0.5s;
+}
+.inputUser:focus{
+    border: 0.20em solid #5C62EF;
+}
+
+.buttonUser {
+    background-color: #5C62EF;
+    border: none;
+    border-radius: 0.3em;
+    color: white;
+    cursor: pointer;
+    display: block;
+    font-size: 1.05rem;
+   
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 0.65em;
+
+    height: 3.5em;
+    width: 40%;
+    padding: 0.5em 0.5em;     
+}
+.buttonUser:hover{
+    background-color: #5055da;
+}
+
+.linkUS{
+    color: #5C62EF;
+    text-decoration: none;   
+}
+.linkUS:hover{
+    color: #43468b;   
+}
+
+
+
+@media screen and (min-width: 751px) {
+    #title-user{
+        font-size: 2.8em;
+    }
+    .inputUser{
+        font-size: 1.1em;
+    }
+    .buttonUser{
+        font-size: 1rem;
+    }
+    .labelUser{
+        font-size: 1rem;
+    }
+    .linkUS{
+        font-size: 1rem;
+    }
+    .form-boxUser{
+        left: 30%;
+        right: 30%;
+        width: 40%;
+        border-radius: 0.7em;
+        box-shadow: 2px 2px 5px 2px #b6b6b6;
+    }
+  }
+  
+  @media screen and (max-width: 750px) {
+    body{
+        background-color:#ffffff
+    }
+    #title-user{
+        font-size: 2.2rem;
+    }
+    .inputUser{
+        font-size: 0.9rem;
+    }
+    .buttonUser{
+        font-size: 0.8rem;
+    }
+    .labelUser{
+        font-size: 0.75rem;
+    }
+    .linkUS{
+        font-size: 0.75rem;
+    }
+    .form-boxUser{
+        width: 100%;
+    }
+  }
+
+
