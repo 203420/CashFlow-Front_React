@@ -1,4 +1,4 @@
-# Creación del frontend en React
+# Creación del frontend en React Js
 
 ## Instalación de axios para el manejo de solicitudes HTTP
 ```bash
