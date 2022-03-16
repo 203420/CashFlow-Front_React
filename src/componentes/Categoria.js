@@ -1,122 +1,143 @@
 import axios from "axios";
 import { NavLink } from "react-router-dom";
-import '../estilos/Main.css'
-import Menu from '../img/menu.png'
+import '../estilos/Main.css';
+import { Component } from 'react';
+import Menu from '../img/menu.png';
 
-function App() {
+class App extends Component {
 
-    const registrar_categoria = () =>{
+    constructor(props) {
+        super(props)
+        this.state = {
+            categorias: [],
+        }
+    }
+
+    componentDidMount() {
+        axios
+            .get("http://localhost:8000/cashflow/categorias/lista", {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Token ' + localStorage.getItem('token'),
+                },
+            })
+            .then(res => {
+                this.setState({ categorias: res.data.pay_load })
+            })
+            .catch(error => {
+                console.log(error.response);
+            })
+    }
+
+    registrar_categoria() {
         var postData = {
             clasificacion: document.getElementById("select").value,
             categoria: document.getElementById("inputCategoria").value,
-            subcategoria: document.getElementById("inputSubcategoria").value,   
+            subcategoria: document.getElementById("inputSubcategoria").value,
         }
 
-        axios.post("http://localhost:8000/cashflow/categorias/list",postData,{
-            Headers: { "Content-Type": "application/json", 'Token ': localStorage.getItem('token'),
-        },  
+        axios.post("http://localhost:8000/cashflow/categorias/lista", postData, {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Token ' + localStorage.getItem('token'),
+            },
         })
-        .then((response) => {
-            console.log(response.data)
-        })
-        .catch((error) => {
-            console.log(error.response.data)
-        })
+            .then((response) => {
+                window.location.reload();
+            })
+            .catch((error) => {
+                console.log(error.response.data)
+            })
     }
 
-    const mostrar_nav = () =>{
+    mostrar_nav() {
         document.getElementById('navMain').style.display = "block"
     }
-    const ocultar_nav = () =>{
+    ocultar_nav() {
         document.getElementById('navMain').style.display = "none"
     }
 
 
-    return (
-        <body>
-           <header id="headerMain">
-                <div>
-                    <NavLink className="linkNav" to="/menu">
-                        <h3 id="titleMain">Cashflow</h3>
-                    </NavLink>
-                </div>
-                <img onClick={mostrar_nav} src={Menu} id="menuImg" alt="error" />
-            </header>
-
-            <div id="navMain">
-                <span className="navText"><NavLink className="linkNav" to="/categorias">Categorias</NavLink></span>
-                <span className="navText"><NavLink className="linkNav" to="/flujo">Flujo</NavLink></span>
-                <span className="navText"><NavLink className="linkNav" to="/indicadores">Indicadores</NavLink></span>
-                <span className="navText"><NavLink className="linkNav" to="/">Reporte</NavLink></span>
-                <button className="buttonMain" onClick={ocultar_nav} id="buttonNav">Salir</button>
-            </div>
-
-
-
-            <h2 id="titleBig">Registrar Categorias</h2>
-            <div className="container">
-                <div className="forms-card" id="form-category">
-                    <h1 className="title" id="title-form">Agregar Categorias</h1>
-                    <label className="formLabel">Clasificación:</label>
-                    <select name="selection" id="select" placeholder="Opcion:">
-                        <option value="0" selected disabled>Selecciona una opción</option>
-                        <option value="GAO">GAO</option>
-                        <option value="Ingreso">Ingreso</option>
-                        <option value="Costo-Venta">Costo-Venta</option>
-                    </select>
-
-                    <div className="input">
-                        <input type="text" className="input-fieldMain" required />
-                        <label className="input-label" id="inputCategoria">Categoria</label>
+    render() {
+        return (
+            <body>
+                <header id="headerMain">
+                    <div>
+                        <NavLink className="linkNav" to="/menu">
+                            <h3 id="titleMain">Cashflow</h3>
+                        </NavLink>
                     </div>
-                    <div className="input">
-                        <input type="text" className="input-fieldMain" required />
-                        <label className="input-label" id="inputSubcategoria">Subcategoria</label>
-                    </div>
-                    <div className="action">
-                        <button className="action-button">Guardar</button>
-                    </div>
+                    <img onClick={this.mostrar_nav} src={Menu} id="menuImg" alt="error" />
+                </header>
+
+                <div id="navMain">
+                    <span className="navText"><NavLink className="linkNav" to="/categorias">Categorias</NavLink></span>
+                    <span className="navText"><NavLink className="linkNav" to="/flujo">Flujo</NavLink></span>
+                    <span className="navText"><NavLink className="linkNav" to="/indicadores">Indicadores</NavLink></span>
+                    <span className="navText"><NavLink className="linkNav" to="/">Reporte</NavLink></span>
+                    <button className="buttonMain" onClick={this.ocultar_nav} id="buttonNav">Salir</button>
                 </div>
 
 
-                <div id="data-categories">
-                    <h1 className="title" id="title-table">Lista de categorias</h1>
-                    <table id="table">
-                        <thead>
-                            <tr>
-                                <th>Clasificación</th>
-                                <th>Categoria</th>
-                                <th>Subcategoria</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr className="info-table">
-                                <td>GAO</td>
-                                <td>Maria Anders</td>
-                                <td>Germany</td>
-                            </tr>
-                            <tr className="info-table">
-                                <td>Ingreso</td>
-                                <td>Christina Berglund</td>
-                                <td>Sweden</td>
-                            </tr>
-                            <tr className="info-table">
-                                <td>Costo-Venta</td>
-                                <td>Francisco Chang</td>
-                                <td>Mexico</td>
-                            </tr>
-                            <tr className="info-table">
-                                <td>Ingreso</td>
-                                <td>Chang Frn</td>
-                                <td>Mexico</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </body>
 
-    );
+                <h2 id="titleBig">Registrar Categorias</h2>
+                <div className="container">
+                    <div className="forms-card" id="form-category">
+                        <h1 className="title" id="title-form">Agregar Categorias</h1>
+                        <label className="formLabel">Clasificación:</label>
+                        <select name="selection" id="select" placeholder="Opcion:">
+                            <option value="0" selected disabled>Selecciona una opción</option>
+                            <option value="GAO">GAO</option>
+                            <option value="Ingreso">Ingreso</option>
+                            <option value="Costo-Venta">Costo-Venta</option>
+                        </select>
+
+                        <div className="input">
+                            <input type="text" className="input-fieldMain" id="inputCategoria" required />
+                            <label className="input-label" >Categoria</label>
+                        </div>
+                        <div className="input">
+                            <input type="text" className="input-fieldMain" id="inputSubcategoria" required />
+                            <label className="input-label" >Subcategoria</label>
+                        </div>
+                        <div className="action">
+                            <button className="action-button" onClick={this.registrar_categoria}>Guardar</button>
+                        </div>
+                    </div>
+
+
+                    <div id="data-categories">
+                        <h1 className="title" id="title-table">Lista de categorias</h1>
+                        <table id="table">
+                            <thead>
+                                <tr>
+                                    <th>Clasificación</th>
+                                    <th>Categoria</th>
+                                    <th>Subcategoria</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {
+                                    this.state.categorias.map(categorias => <tr className="info-table" key={categorias.id}>
+                                        <td>{categorias.clasificacion}</td>
+                                        <td>{categorias.categoria}</td>
+                                        <td>{categorias.subcategoria}</td>
+                                    </tr>)
+                                }
+                                {/* <tr className="info-table">
+                                    <td></td>
+                                    <td>Maria Anders</td>
+                                    <td>Germany</td>
+                                </tr> */}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </body>
+
+        );
+    }
+
 }
 
 export default App;
