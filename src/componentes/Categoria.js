@@ -57,6 +57,9 @@ class App extends Component {
         document.getElementById('navMain').style.display = "none"
     }
 
+    // evento(categorias) {
+    //     alert("ID Categoria: " + categorias.id + "\nClasificación: " + categorias.clasificacion)
+    // }
 
     render() {
         return (
@@ -118,6 +121,7 @@ class App extends Component {
                             </thead>
                             <tbody>
                                 {
+                                    // this.state.categorias.map(categorias => <tr className="info-table" key={categorias.id} onDoubleClick={this.evento.bind(this, categorias)}>
                                     this.state.categorias.map(categorias => <tr className="info-table" key={categorias.id}>
                                         <td>{categorias.clasificacion}</td>
                                         <td>{categorias.categoria}</td>
