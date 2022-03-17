@@ -4,17 +4,19 @@ import Menu from '../img/menu.png'
 
 function App() {
 
-    const mostrar_nav = () =>{
+    const mostrar_nav = () => {
         document.getElementById('navMain').style.display = "block"
+        document.getElementById('background').style.display = "block"
     }
-
-    const ocultar_nav = () =>{
+    const ocultar_nav = () => {
         document.getElementById('navMain').style.display = "none"
+        document.getElementById('background').style.display = "none"
     }
 
 
     return (
         <body>
+            <div id="background" onClick={ocultar_nav}></div>
             <header id="headerMain">
                 <div>
                     <NavLink className="linkNav" to="/menu">
@@ -28,7 +30,7 @@ function App() {
                 <span className="navText"><NavLink className="linkNav" to="/categorias">Categorias</NavLink></span>
                 <span className="navText"><NavLink className="linkNav" to="/flujo">Flujo</NavLink></span>
                 <span className="navText"><NavLink className="linkNav" to="/indicadores">Indicadores</NavLink></span>
-                <span className="navText"><NavLink className="linkNav" to="/">Reporte</NavLink></span>
+                <span className="navText"><NavLink className="linkNav" to="/reportes">Reportes</NavLink></span>
                 <button className="buttonMain" onClick={ocultar_nav} id="buttonNav">Salir</button>
             </div>
 

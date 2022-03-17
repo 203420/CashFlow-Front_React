@@ -10,6 +10,17 @@
 body{
     background-color: #fcfcfc;
 }
+#background{
+    display: none;
+    background-color: black;
+    height: 100vh;
+    width: 100%;
+
+    top: 0;
+    position: fixed;
+    opacity: 0.3;
+    z-index: 5;
+}
 #headerMain{
     display: flex;
     flex-direction: row;
@@ -250,6 +261,38 @@ tbody tr:hover{
     border:none;
 }
 
+.labelReport{
+    display: block;
+    font-weight: 500;
+}
+.buttonReport{
+    background-color: #5C62EF;
+    border-radius: 0.3em;
+    color: #fff;
+    border: 0;
+    font-size: 1.05rem;
+    margin-bottom: 1.8em;
+    margin-top: 1em;
+    width: 50%;
+    height: 2.5em ;
+}
+#imgReport{
+    display: none;
+}
+#textReport{
+    background-color: rgb(245, 245, 245);
+    font-size: 0.8rem;
+    height: 7em;
+    position: absolute;
+    bottom: 0;
+    opacity: 0.8;
+    padding-left: 10%;
+    padding-right: 10%;
+    padding-top: 1em;
+    padding-bottom: 1.5em;
+    width: 100%;
+}
+
 @media screen and (min-width: 740px){
     #navMain{
         left: 70%;
@@ -260,6 +303,40 @@ tbody tr:hover{
     }
     #titleMain{
         font-size: 2em;
+    }
+    .forms-card3{
+        display: flex;
+        flex-direction: column;
+        width: 14.75em;
+        background-color: #fcfcfc;
+        border-radius: 0.8em;
+        box-shadow: 0 8px 20px 0 rgba(153, 153, 153, .25);
+        padding: 1.4rem 1.5rem;
+        margin-bottom: 0;
+    }
+    .buttonReport{
+        width: 65%;
+    }
+    #imgReport{
+        display: block;
+        position: absolute;
+        left: 44%;
+        top: 10.2em;
+        width: 25em;
+    }
+    #textReport{
+        position: relative;
+        background-color: transparent;
+        padding: 0;
+        opacity: 1;
+
+        display: block;
+        margin-top: 3em;
+        margin-left: auto;
+        margin-right: auto;
+        width: 80%;
+        text-align: left;
+        margin-top: 2.5em;
     }
     
     
@@ -332,6 +409,16 @@ tbody tr:hover{
         box-shadow: 0 5px 20px 0 rgba(153, 153, 153, .25);
         padding: 1.4rem 1.5rem;
     }
+
+    #imgReport{
+        left: 42%;
+        top: 9em;
+        width: 29.5em;
+    }
+    #textReport{
+        font-size: 0.9rem;
+        width: 70%;
+    }
     
 }
 @media screen and (min-width: 1280px){
@@ -357,6 +444,17 @@ tbody tr:hover{
     }
     #data-categories{
         width: 44%;
+    }
+    .forms-card3{
+        margin-top: 1em;
+    }
+    #data-categories{
+        width: 44%;
+    }
+    #imgReport{
+        left: 40%;
+        top: 5.5em;
+        width: 35em;
     }
 }
 

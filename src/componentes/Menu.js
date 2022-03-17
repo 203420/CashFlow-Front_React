@@ -3,6 +3,7 @@ import '../estilos/Menu.css'
 import img1 from '../img/list.png'
 import img2 from '../img/money.png'
 import img3 from '../img/finance.png'
+import img4 from '../img/document.png'
 
 function App() {
     let navigate = useNavigate();
@@ -38,9 +39,16 @@ function App() {
                 </div>
                 <div className="optionMenu">
                     <NavLink className="linkMenu" to="/indicadores">
-                        <img src={img3} className="imgMenu" id="doc" alt="error"/>
+                        <img src={img3} className="imgMenu" id="ind" alt="error"/>
                         <span className="spanMenu">Registrar indicadores</span>
                         <br/><p>Permite registrar datos como cuentas por pagar, cobrar y bancos</p>
+                    </NavLink>
+                </div>
+                <div className="optionMenu">
+                    <NavLink className="linkMenu" to="/reportes">
+                        <img src={img4} className="imgMenu" id="ind" alt="error"/>
+                        <span className="spanMenu">Generar reportes</span>
+                        <br/><p>Permite generar reportes financieros con los datos del último mes</p>
                     </NavLink>
                 </div>
             </div>

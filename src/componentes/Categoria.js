@@ -52,15 +52,17 @@ class App extends Component {
 
     mostrar_nav() {
         document.getElementById('navMain').style.display = "block"
+        document.getElementById('background').style.display = "block"
     }
     ocultar_nav() {
         document.getElementById('navMain').style.display = "none"
+        document.getElementById('background').style.display = "none"
     }
-
 
     render() {
         return (
             <body>
+                <div id="background" onClick={this.ocultar_nav}></div>
                 <header id="headerMain">
                     <div>
                         <NavLink className="linkNav" to="/menu">
@@ -74,7 +76,7 @@ class App extends Component {
                     <span className="navText"><NavLink className="linkNav" to="/categorias">Categorias</NavLink></span>
                     <span className="navText"><NavLink className="linkNav" to="/flujo">Flujo</NavLink></span>
                     <span className="navText"><NavLink className="linkNav" to="/indicadores">Indicadores</NavLink></span>
-                    <span className="navText"><NavLink className="linkNav" to="/">Reporte</NavLink></span>
+                    <span className="navText"><NavLink className="linkNav" to="/reportes">Reportes</NavLink></span>
                     <button className="buttonMain" onClick={this.ocultar_nav} id="buttonNav">Salir</button>
                 </div>
 

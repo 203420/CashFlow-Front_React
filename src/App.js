@@ -5,6 +5,7 @@ import Menu from './componentes/Menu'
 import Categoria from './componentes/Categoria'
 import Flujo from './componentes/Flujo'
 import Indicadores from './componentes/Indicadores'
+import Reporte from './componentes/Reporte'
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
             <Route exact path="/categorias" element={<Categoria/>}/>
             <Route exact path="/flujo" element={<Flujo/>}/>
             <Route exact path="/indicadores" element={<Indicadores/>}/>
+            <Route exact path="/reportes" element={<Reporte/>}/>
         </Routes>
     </BrowserRouter>      
     </>
