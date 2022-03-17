@@ -1,118 +1,169 @@
 import { NavLink } from "react-router-dom";
 import '../estilos/Main.css'
 import Menu from '../img/menu.png'
+import { Component } from 'react';
+import axios from "axios";
 
-function App() {
+class App extends Component {
 
-    const mostrar_nav = () =>{
+    constructor(props) {
+        super(props)
+        this.state = {
+            flujos: [],
+            categorias: []
+        }
+    }
+
+    componentDidMount() {
+        axios
+            .get("http://localhost:8000/cashflow/flujos/lista", {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Token ' + localStorage.getItem('token'),
+                },
+            })
+            .then(res => {
+                this.setState({ flujos: res.data })
+            })
+            .catch(error => {
+                console.log(error.response);
+            })
+
+        axios
+            .get("http://localhost:8000/cashflow/categorias/lista", {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Token ' + localStorage.getItem('token'),
+                },
+            })
+            .then(res => {
+                this.setState({ categorias: res.data.pay_load })
+            })
+            .catch(error => {
+                console.log(error.response);
+            })
+    }
+
+    registrar_flujo() {
+        var postData = {
+            tipo: document.getElementById("selectFlujo").value,
+            categoria: document.getElementById("selectCat").value,
+            descripcion: document.getElementById("inputDesc").value,
+            cantidad: document.getElementById("inputCant").value
+        }
+
+        // console.log(document.getElementById("selectFlujo").value)
+        // console.log(document.getElementById("selectCat").value)
+        // console.log(document.getElementById("inputDesc").value)
+        // console.log(document.getElementById("inputCant").value)
+
+        axios.post("http://localhost:8000/cashflow/flujos/lista", postData, {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Token ' + localStorage.getItem('token'),
+            },
+        })
+            .then((response) => {
+                window.location.reload();
+            })
+            .catch((error) => {
+                console.log(error.response.data)
+            })
+    }
+
+    mostrar_nav() {
         document.getElementById('navMain').style.display = "block"
     }
-    const ocultar_nav = () =>{
+
+    ocultar_nav() {
         document.getElementById('navMain').style.display = "none"
     }
 
+    render() {
+        return (
+            <body>
+                <header id="headerMain">
+                    <div>
+                        <NavLink className="linkNav" to="/menu">
+                            <h3 id="titleMain">Cashflow</h3>
+                        </NavLink>
+                    </div>
+                    <img onClick={this.mostrar_nav} src={Menu} id="menuImg" alt="error" />
+                </header>
 
-
-    return (
-       <body>
-           <header id="headerMain">
-                <div>
-                    <NavLink className="linkNav" to="/menu">
-                        <h3 id="titleMain">Cashflow</h3>
-                    </NavLink>
+                <div id="navMain">
+                    <span className="navText"><NavLink className="linkNav" to="/categorias">Categorias</NavLink></span>
+                    <span className="navText"><NavLink className="linkNav" to="/flujo">Flujo</NavLink></span>
+                    <span className="navText"><NavLink className="linkNav" to="/indicadores">Indicadores</NavLink></span>
+                    <span className="navText"><NavLink className="linkNav" to="/">Reporte</NavLink></span>
+                    <button className="buttonMain" onClick={this.ocultar_nav} id="buttonNav">Salir</button>
                 </div>
-                <img onClick={mostrar_nav} src={Menu} id="menuImg" alt="error" />
-            </header>
 
-            <div id="navMain">
-                <span className="navText"><NavLink className="linkNav" to="/categorias">Categorias</NavLink></span>
-                <span className="navText"><NavLink className="linkNav" to="/flujo">Flujo</NavLink></span>
-                <span className="navText"><NavLink className="linkNav" to="/indicadores">Indicadores</NavLink></span>
-                <span className="navText"><NavLink className="linkNav" to="/">Reporte</NavLink></span>
-                <button className="buttonMain" onClick={ocultar_nav} id="buttonNav">Salir</button>
-            </div>
+                <h2 id="titleBig">Registrar flujo de efectivo</h2>
+                <div className="container">
+                    <div className="forms-card" id="form-category">
+                        <h1 className="title" id="title-form">Agregar Flujo</h1>
 
-            <h2 id="titleBig">Registrar flujo de efectivo</h2>
-            <div className="container">
-                <div className="forms-card" id="form-category">
-                    <h1 className="title" id="title-form">Agregar Flujo</h1>
+                        <label className="formLabel">Tipo de flujo:</label>
+                        <select name="selection" id="selectFlujo" placeholder="Opcion:">
+                            <option value="0" selected disabled>Selecciona una opción</option>
+                            <option value="Entrada">Entrada</option>
+                            <option value="Salida">Salida</option>
+                        </select>
 
-                    <label className="formLabel">Tipo de flujo:</label>
-                    <div className="type">
-                        <input type="radio" name="options" id="entrada" className="radioInput"/>
-                        <label for="entrada">Entrada</label>
+                        <label className="formLabel">Categoria:</label>
+                        <select name="selection" id="selectCat" placeholder="Opcion:">
+                            <option value="0" selected disabled>Selecciona una opción</option>
+                            {
+                                this.state.categorias.map(categorias =>
+                                    <option value={categorias.id} key={categorias.id}>{categorias.categoria} - {categorias.subcategoria}</option>
+                                )
+                            }
+                        </select>
+
+                        <div className="input">
+                            <input type="text" className="input-fieldMain" id="inputDesc" required />
+                            <label className="input-label">Descripción</label>
+                        </div>
+                        <div className="input">
+                            <input type="text" className="input-fieldMain" id="inputCant" required />
+                            <label className="input-label">Cantidad</label>
+                        </div>
+                        <div className="action">
+                            <button className="action-button" onClick={this.registrar_flujo}>Guardar</button>
+                        </div>
                     </div>
-                    <div className="type">
-                        <input type="radio" name="options" id="salida" className="radioInput"/>
-                        <label for="salida">Salida</label>
-                    </div>
 
 
-                    <label className="formLabel">Categoria:</label>
-                    <select name="selection" id="select" placeholder="Opcion:">
-                        <option value="0" selected disabled>Selecciona una opción</option>
-                        <option value="1">Nomina</option>
-                        <option value="2">Venta</option>
-                        <option value="3">Pago</option>
-                    </select>
-
-                    <div className="input">
-                        <input type="text" className="input-fieldMain" required/>
-                        <label className="input-label">Descripción</label>
-                    </div>
-                    <div className="input">
-                        <input type="text" className="input-fieldMain" required/>
-                        <label className="input-label">Cantidad</label>
-                    </div>
-                    <div className="action">
-                        <button className="action-button">Guardar</button>
+                    <div id="data-categories">
+                        <h1 className="title" id="title-table">Ultimos registros</h1>
+                        <table id="table">
+                            <thead>
+                                <tr>
+                                    <th>Fecha</th>
+                                    <th>Descripción</th>
+                                    <th>Categoria</th>
+                                    <th>Subcategoria</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {
+                                    this.state.flujos.map(flujos => <tr className="info-table" key={flujos.id}>
+                                        <td>{flujos.fecha}</td>
+                                        <td>{flujos.descripcion}</td>
+                                        <td>{flujos.categoriaCat}</td>
+                                        <td>{flujos.subcategoriaCat}</td>
+                                    </tr>)
+                                }
+                            </tbody>
+                        </table>
                     </div>
                 </div>
-                
+            </body>
 
-                <div id="data-categories">
-                    <h1 className="title" id="title-table">Ultimos registros</h1>
-                    <table id="table">
-                        <thead>
-                            <tr>
-                                <th>Fecha</th>
-                                <th>Descripción</th>
-                                <th>Categoria</th>
-                                <th>Subcategoria</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr className="info-table">
-                                <td>04/01/2021</td>
-                                <td>Pago Cliente 345</td>
-                                <td>Nómina</td>
-                                <td>Germany</td>
-                            </tr>
-                            <tr className="info-table">
-                                <td>05/01/2021</td>
-                                <td>Envio pedido 120</td>
-                                <td>Christina Berglund</td>
-                                <td>Sweden</td>
-                            </tr>
-                            <tr className="info-table">
-                                <td>06/01/2021</td>
-                                <td> Anticipo pedido 104</td>
-                                <td>Francisco Chang</td>
-                                <td>Mexico</td>
-                            </tr>
-                            <tr className="info-table">
-                                <td>07/01/2021</td>
-                                <td>Pago Sra. María Sol</td>
-                                <td>Chang Frn</td>
-                                <td>Mexico</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-       </body>
-       
-    );
+        );
+    }
+
 }
 
 export default App;

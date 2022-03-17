@@ -124,11 +124,6 @@ class App extends Component {
                                         <td>{categorias.subcategoria}</td>
                                     </tr>)
                                 }
-                                {/* <tr className="info-table">
-                                    <td></td>
-                                    <td>Maria Anders</td>
-                                    <td>Germany</td>
-                                </tr> */}
                             </tbody>
                         </table>
                     </div>
