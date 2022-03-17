@@ -39,6 +39,20 @@ body{
     background-repeat: no-repeat;
     padding-left: 2.8em;
 }
+#nombre{
+    background: url('../img/user.png');
+    background-size: 2em;
+    background-position: 0.3em 0.45em;
+    background-repeat: no-repeat;
+    padding-left: 2.8em;
+}
+#apellido{
+    background: url('../img/user.png');
+    background-size: 2em;
+    background-position: 0.3em 0.45em;
+    background-repeat: no-repeat;
+    padding-left: 2.8em;
+}
 #email{
     background: url('../img/mail.png');
     background-size: 2em;
@@ -47,6 +61,20 @@ body{
     padding-left: 2.8em;
 }
 #passw{
+    background: url('../img/password.png');
+    background-size: 2.25em;
+    background-position: 0.2em 0.3em;
+    background-repeat: no-repeat;
+    padding-left: 2.8em;
+}
+#passw1{
+    background: url('../img/password.png');
+    background-size: 2.25em;
+    background-position: 0.2em 0.3em;
+    background-repeat: no-repeat;
+    padding-left: 2.8em;
+}
+#passw2{
     background: url('../img/password.png');
     background-size: 2.25em;
     background-position: 0.2em 0.3em;

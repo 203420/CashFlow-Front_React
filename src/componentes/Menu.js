@@ -1,16 +1,23 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import '../estilos/Menu.css'
 import img1 from '../img/list.png'
 import img2 from '../img/money.png'
 import img3 from '../img/finance.png'
 
 function App() {
+    let navigate = useNavigate();
+
+    const logout = () => {
+        localStorage.clear();
+        navigate('/',{replace:true});
+    }
+
     return (
         <body>
             <header>
                 <div id="navMenu">
                     <div><NavLink className="linkMenu" to="/menu"><h3 id="title-Menu">Cashflow</h3></NavLink></div>
-                    <button id="buttonMenu">Salir</button>
+                    <button id="buttonMenu" onClick={logout}>Salir</button>
                 </div>
             </header>
 

@@ -1,8 +1,10 @@
 import axios from 'axios';
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import '../estilos/FormsUser.css'
 
 function App () {
+    let navigate = useNavigate();
+
     const requestOptions = {
         method: 'POST',
         headers: {
@@ -21,7 +23,7 @@ function App () {
             .then(response => {
                 localStorage.setItem('token', response.data.token);
                 localStorage.setItem('user_id', response.data.user_id);
-                window.location.replace("http://localhost:3000/menu/");
+                navigate('/menu',{replace:true});
             })
             .catch((error) => {
                 console.log(error.response.data)
