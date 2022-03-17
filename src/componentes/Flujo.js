@@ -52,11 +52,6 @@ class App extends Component {
             cantidad: document.getElementById("inputCant").value
         }
 
-        // console.log(document.getElementById("selectFlujo").value)
-        // console.log(document.getElementById("selectCat").value)
-        // console.log(document.getElementById("inputDesc").value)
-        // console.log(document.getElementById("inputCant").value)
-
         axios.post("http://localhost:8000/cashflow/flujos/lista", postData, {
             headers: {
                 'Content-Type': 'application/json',
@@ -78,6 +73,12 @@ class App extends Component {
     ocultar_nav() {
         document.getElementById('navMain').style.display = "none"
         document.getElementById('background').style.display = "none"
+    }
+
+    splitText(f) {
+        let fecha = f
+        let x = fecha.split("T")
+        return(x[0])
     }
 
     render() {
@@ -151,7 +152,7 @@ class App extends Component {
                             <tbody>
                                 {
                                     this.state.flujos.map(flujos => <tr className="info-table" key={flujos.id}>
-                                        <td>{flujos.fecha}</td>
+                                        <td>{this.splitText(flujos.fecha)}</td>
                                         <td>{flujos.descripcion}</td>
                                         <td>{flujos.categoriaCat}</td>
                                         <td>{flujos.subcategoriaCat}</td>
