@@ -31,8 +31,7 @@ class App extends Component {
 
     registrar_categoria() {
         var postData = {
-            clasificacion: document.getElementById("select").value,
-            categoria: document.getElementById("inputCategoria").value,
+            categoria: document.getElementById("select").value,
             subcategoria: document.getElementById("inputSubcategoria").value,
         }
 
@@ -86,18 +85,13 @@ class App extends Component {
                 <div className="container">
                     <div className="forms-card" id="form-category">
                         <h1 className="title" id="title-form">Agregar Categorias</h1>
-                        <label className="formLabel">Clasificación:</label>
+                        <label className="formLabel">Categoria:</label>
                         <select name="selection" id="select" placeholder="Opcion:">
                             <option value="0" selected disabled>Selecciona una opción</option>
-                            <option value="GAO">GAO</option>
+                            <option value="Gasto-AOC">Gasto-AOC</option>
                             <option value="Ingreso">Ingreso</option>
                             <option value="Costo-Venta">Costo-Venta</option>
                         </select>
-
-                        <div className="input">
-                            <input type="text" className="input-fieldMain" id="inputCategoria" required />
-                            <label className="input-label" >Categoria</label>
-                        </div>
                         <div className="input">
                             <input type="text" className="input-fieldMain" id="inputSubcategoria" required />
                             <label className="input-label" >Subcategoria</label>
@@ -113,7 +107,6 @@ class App extends Component {
                         <table id="table">
                             <thead>
                                 <tr>
-                                    <th>Clasificación</th>
                                     <th>Categoria</th>
                                     <th>Subcategoria</th>
                                 </tr>
@@ -122,7 +115,6 @@ class App extends Component {
                                 {
                                     // this.state.categorias.map(categorias => <tr className="info-table" key={categorias.id} onDoubleClick={this.evento.bind(this, categorias)}>
                                     this.state.categorias.map(categorias => <tr className="info-table" key={categorias.id}>
-                                        <td>{categorias.clasificacion}</td>
                                         <td>{categorias.categoria}</td>
                                         <td>{categorias.subcategoria}</td>
                                     </tr>)

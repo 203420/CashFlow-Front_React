@@ -10,8 +10,9 @@ class App extends Component {
         super(props)
         this.state = {
             flujos: [],
-            categorias: []
+            categorias: [],
         }
+        this.obtener_categoria = this.obtener_categoria.bind(this);
     }
 
     componentDidMount() {
@@ -29,19 +30,57 @@ class App extends Component {
                 console.log(error.response);
             })
 
-        axios
-            .get("http://localhost:8000/cashflow/categorias/lista", {
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': 'Token ' + localStorage.getItem('token'),
-                },
-            })
-            .then(res => {
-                this.setState({ categorias: res.data.pay_load })
-            })
-            .catch(error => {
-                console.log(error.response);
-            })
+        // axios
+        //     .get("http://localhost:8000/cashflow/categorias/lista", {
+        //         headers: {
+        //             'Content-Type': 'application/json',
+        //             'Authorization': 'Token ' + localStorage.getItem('token'),
+        //         },
+        //     })
+        //     .then(res => {
+        //         this.setState({ categorias: res.data.pay_load })
+        //     })
+        //     .catch(error => {
+        //         console.log(error.response);
+        //     })
+    }
+
+    obtener_categoria() {
+        let tipo = document.getElementById("selectFlujo").value;
+
+        if (tipo == "Entrada") {
+
+            axios
+                .get("http://localhost:8000/cashflow/categorias/entradas", {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': 'Token ' + localStorage.getItem('token'),
+                    },
+                })
+                .then(res => {
+                    this.setState({ categorias: res.data.pay_load })
+                })
+                .catch(error => {
+                    console.log("Error");
+                })
+
+        } else if (tipo == "Salida") {
+
+            axios
+                .get("http://localhost:8000/cashflow/categorias/salidas", {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': 'Token ' + localStorage.getItem('token'),
+                    },
+                })
+                .then(res => {
+                    this.setState({ categorias: res.data.pay_load })
+                })
+                .catch(error => {
+                    console.log("Error");
+                })
+
+        }
     }
 
     registrar_flujo() {
@@ -78,7 +117,7 @@ class App extends Component {
     splitText(f) {
         let fecha = f
         let x = fecha.split("T")
-        return(x[0])
+        return (x[0])
     }
 
     render() {
@@ -108,7 +147,7 @@ class App extends Component {
                         <h1 className="title" id="title-form">Agregar Flujo</h1>
 
                         <label className="formLabel">Tipo de flujo:</label>
-                        <select name="selection" id="selectFlujo" placeholder="Opcion:">
+                        <select name="selection" id="selectFlujo" placeholder="Opcion:" onChange={this.obtener_categoria}>
                             <option value="0" selected disabled>Selecciona una opción</option>
                             <option value="Entrada">Entrada</option>
                             <option value="Salida">Salida</option>
@@ -119,7 +158,7 @@ class App extends Component {
                             <option value="0" selected disabled>Selecciona una opción</option>
                             {
                                 this.state.categorias.map(categorias =>
-                                    <option value={categorias.id} key={categorias.id}>{categorias.categoria} - {categorias.subcategoria}</option>
+                                    <option value={categorias.id} key={categorias.id}>{categorias.subcategoria}</option>
                                 )
                             }
                         </select>
@@ -145,6 +184,7 @@ class App extends Component {
                                 <tr>
                                     <th>Fecha</th>
                                     <th>Descripción</th>
+                                    <th>Cantidad</th>
                                     <th>Categoria</th>
                                     <th>Subcategoria</th>
                                 </tr>
@@ -154,6 +194,7 @@ class App extends Component {
                                     this.state.flujos.map(flujos => <tr className="info-table" key={flujos.id}>
                                         <td>{this.splitText(flujos.fecha)}</td>
                                         <td>{flujos.descripcion}</td>
+                                        <td>{flujos.cantidad}</td>
                                         <td>{flujos.categoriaCat}</td>
                                         <td>{flujos.subcategoriaCat}</td>
                                     </tr>)
