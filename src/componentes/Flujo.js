@@ -29,20 +29,6 @@ class App extends Component {
             .catch(error => {
                 console.log(error.response);
             })
-
-        // axios
-        //     .get("http://localhost:8000/cashflow/categorias/lista", {
-        //         headers: {
-        //             'Content-Type': 'application/json',
-        //             'Authorization': 'Token ' + localStorage.getItem('token'),
-        //         },
-        //     })
-        //     .then(res => {
-        //         this.setState({ categorias: res.data.pay_load })
-        //     })
-        //     .catch(error => {
-        //         console.log(error.response);
-        //     })
     }
 
     obtener_categoria() {

@@ -1,8 +1,50 @@
 import { NavLink } from "react-router-dom";
 import '../estilos/Main.css'
 import Menu from '../img/menu.png'
+import axios from "axios";
 
 function App() {
+
+    const post_indicadores = (t) => {
+        if (t == "CPC") {
+            var postData = {
+                semana: document.getElementById('semana1').value,
+                razon: document.getElementById('razon1').value,
+                cantidad: document.getElementById('cantidad1').value,
+                tipo: t
+            }
+        }
+        if (t == "CPP") {
+            var postData = {
+                semana: document.getElementById('semana2').value,
+                razon: document.getElementById('razon2').value,
+                cantidad: document.getElementById('cantidad2').value,
+                tipo: t
+            }
+        }
+        if (t == "BNC") {
+            var postData = {
+                semana: document.getElementById('semana3').value,
+                razon: document.getElementById('razon3').value,
+                cantidad: document.getElementById('cantidad3').value,
+                tipo: t
+            }
+        }
+
+        axios
+            .post("http://localhost:8000/cashflow/indicadores/lista", postData, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Token ' + localStorage.getItem('token'),
+                },
+            })
+            .then((response) => {
+                window.location.reload();
+            })
+            .catch((error) => {
+                console.log("Error")
+            })
+    }
 
     const mostrar_nav = () => {
         document.getElementById('navMain').style.display = "block"
@@ -38,58 +80,67 @@ function App() {
             <div className="container2">
                 <div className="forms-card2" id="cobrar">
                     <h1 className="title2">Cuentas por cobrar</h1>
+                    <select name="selection" id="semana1" placeholder="Opcion:">
+                        <option value="null" selected disabled>Número de semana</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                    </select>
                     <div className="input">
-                        <input type="text" className="input-fieldMain" required />
-                        <label className="input-label">Número de Semana</label>
-                    </div>
-                    <div className="input">
-                        <input type="text" className="input-fieldMain" required />
+                        <input type="text" className="input-fieldMain" id="razon1" required />
                         <label className="input-label">Razón Social</label>
                     </div>
                     <div className="input">
-                        <input type="text" className="input-fieldMain" required />
+                        <input type="text" className="input-fieldMain" id="cantidad1" required />
                         <label className="input-label">$ Cantidad</label>
                     </div>
                     <div className="action">
-                        <button className="action-button">Guardar</button>
+                        <button className="action-button" onClick={() => post_indicadores("CPC")}>Guardar</button>
                     </div>
                 </div>
 
                 <div className="forms-card2" id="pagar">
                     <h1 className="title2">Cuentas por pagar</h1>
+                    <select name="selection" id="semana2" placeholder="Opcion:">
+                        <option value="null" selected disabled>Número de semana</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                    </select>
                     <div className="input">
-                        <input type="text" className="input-fieldMain" required />
-                        <label className="input-label">Número de Semana</label>
-                    </div>
-                    <div className="input">
-                        <input type="text" className="input-fieldMain" required />
+                        <input type="text" className="input-fieldMain" id="razon2" required />
                         <label className="input-label">Razón Social</label>
                     </div>
                     <div className="input">
-                        <input type="text" className="input-fieldMain" required />
+                        <input type="text" className="input-fieldMain" id="cantidad2" required />
                         <label className="input-label">$ Cantidad</label>
                     </div>
                     <div className="action">
-                        <button className="action-button">Guardar</button>
+                        <button className="action-button" onClick={() => post_indicadores("CPP")}>Guardar</button>
                     </div>
                 </div>
 
                 <div className="forms-card2" id="bancos">
                     <h1 className="title2">Bancos</h1>
+                    <select name="selection" id="semana3" placeholder="Opcion:">
+                        <option value="null" selected disabled>Número de semana</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                    </select>
                     <div className="input">
-                        <input type="text" className="input-fieldMain" required />
-                        <label className="input-label">Número de Semana</label>
-                    </div>
-                    <div className="input">
-                        <input type="text" className="input-fieldMain" required />
+                        <input type="text" className="input-fieldMain" id="razon3" required />
                         <label className="input-label">Razón Social</label>
                     </div>
                     <div className="input">
-                        <input type="text" className="input-fieldMain" required />
+                        <input type="text" className="input-fieldMain" id="cantidad3" required />
                         <label className="input-label">$ Cantidad</label>
                     </div>
                     <div className="action">
-                        <button className="action-button">Guardar</button>
+                        <button className="action-button" onClick={() => post_indicadores("BNC")}>Guardar</button>
                     </div>
                 </div>
             </div>
