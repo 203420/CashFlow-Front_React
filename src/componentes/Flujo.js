@@ -71,6 +71,7 @@ class App extends Component {
 
     registrar_flujo() {
         var postData = {
+            fecha: document.getElementById("fecha").value,
             tipo: document.getElementById("selectFlujo").value,
             categoria: document.getElementById("selectCat").value,
             descripcion: document.getElementById("inputDesc").value,
@@ -131,6 +132,10 @@ class App extends Component {
                 <div className="container">
                     <div className="forms-card" id="form-category">
                         <h1 className="title" id="title-form">Agregar Flujo</h1>
+                        <div className="input">
+                            <input type="text" className="input-fieldMain" id="fecha" required />
+                            <label className="input-label">Fecha</label>
+                        </div>
 
                         <label className="formLabel">Tipo de flujo:</label>
                         <select name="selection" id="selectFlujo" placeholder="Opcion:" onChange={this.obtener_categoria}>
