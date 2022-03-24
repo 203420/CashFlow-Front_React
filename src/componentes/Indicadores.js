@@ -1,9 +1,12 @@
 import { NavLink } from "react-router-dom";
+import toast, { Toaster } from 'react-hot-toast';
 import '../estilos/Main.css'
 import Menu from '../img/menu.png'
 import axios from "axios";
 
 function App() {
+
+    const notify = () => toast.success('Guardado exitosamente');
 
     const post_indicadores = (t) => {
         if (t == "CPC") {
@@ -40,6 +43,7 @@ function App() {
             })
             .then((response) => {
                 window.location.reload();
+                notify()
             })
             .catch((error) => {
                 console.log("Error")
@@ -58,6 +62,10 @@ function App() {
 
     return (
         <body>
+            <div><Toaster 
+            position="bottom-left"
+            reverseOrder={false}/>
+            </div>
             <div id="background" onClick={ocultar_nav}></div>
             <header id="headerMain">
                 <div>
