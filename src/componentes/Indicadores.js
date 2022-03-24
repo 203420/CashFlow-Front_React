@@ -8,7 +8,7 @@ function App() {
     const post_indicadores = (t) => {
         if (t == "CPC") {
             var postData = {
-                semana: document.getElementById('semana1').value,
+                fecha: document.getElementById('semana1').value,
                 razon: document.getElementById('razon1').value,
                 cantidad: document.getElementById('cantidad1').value,
                 tipo: t
@@ -16,7 +16,7 @@ function App() {
         }
         if (t == "CPP") {
             var postData = {
-                semana: document.getElementById('semana2').value,
+                fecha: document.getElementById('semana2').value,
                 razon: document.getElementById('razon2').value,
                 cantidad: document.getElementById('cantidad2').value,
                 tipo: t
@@ -24,7 +24,7 @@ function App() {
         }
         if (t == "BNC") {
             var postData = {
-                semana: document.getElementById('semana3').value,
+                fecha: document.getElementById('semana3').value,
                 razon: document.getElementById('razon3').value,
                 cantidad: document.getElementById('cantidad3').value,
                 tipo: t
@@ -80,13 +80,10 @@ function App() {
             <div className="container2">
                 <div className="forms-card2" id="cobrar">
                     <h1 className="title2">Cuentas por cobrar</h1>
-                    <select name="selection" id="semana1" placeholder="Opcion:">
-                        <option value="null" selected disabled>Número de semana</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                    </select>
+                    <div className="input">
+                        <input type="text" className="input-fieldMain" id="semana1" required />
+                        <label className="input-label">Fecha</label>
+                    </div>
                     <div className="input">
                         <input type="text" className="input-fieldMain" id="razon1" required />
                         <label className="input-label">Razón Social</label>
@@ -102,13 +99,10 @@ function App() {
 
                 <div className="forms-card2" id="pagar">
                     <h1 className="title2">Cuentas por pagar</h1>
-                    <select name="selection" id="semana2" placeholder="Opcion:">
-                        <option value="null" selected disabled>Número de semana</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                    </select>
+                    <div className="input">
+                        <input type="text" className="input-fieldMain" id="semana2" required />
+                        <label className="input-label">Fecha</label>
+                    </div>
                     <div className="input">
                         <input type="text" className="input-fieldMain" id="razon2" required />
                         <label className="input-label">Razón Social</label>
@@ -124,13 +118,10 @@ function App() {
 
                 <div className="forms-card2" id="bancos">
                     <h1 className="title2">Bancos</h1>
-                    <select name="selection" id="semana3" placeholder="Opcion:">
-                        <option value="null" selected disabled>Número de semana</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                    </select>
+                    <div className="input">
+                        <input type="text" className="input-fieldMain" id="semana3" required />
+                        <label className="input-label">Fecha</label>
+                    </div>
                     <div className="input">
                         <input type="text" className="input-fieldMain" id="razon3" required />
                         <label className="input-label">Razón Social</label>
