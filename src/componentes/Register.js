@@ -3,6 +3,7 @@ import '../estilos/FormsUser.css'
 import axios from "axios";
 
 function App() {
+
     let navigate = useNavigate();
 
     const requestOptions = {
@@ -22,17 +23,14 @@ function App() {
             password2: document.getElementById('passw2').value,
             is_superuser: document.getElementById('selectUser').value
         }
-
-        console.log(document.getElementById('select').value)
-        // axios
-        //     .post("http://localhost:8000/cashflow/register", postData, requestOptions)
-        //     .then(response => {
-        //         alert("Registro exitoso")
-        //         navigate('/',{replace:true});
-        //     })
-        //     .catch((error) => {
-        //         console.log(error.response.data);
-        //     });
+        axios.post("http://localhost:8000/cashflow/register", postData, requestOptions)
+            .then((response) => {
+                alert("Registro exitoso")
+                navigate('/', { replace: true });
+            })
+            .catch((error) => {
+                console.log(error.response.data);
+            });
     };
 
     return (
@@ -53,10 +51,10 @@ function App() {
                     <label className="labelUser">Confirmar contraseña:</label>
                     <input className="inputUser" type="password" name="password2" placeholder="Contraseña" id="passw2" />
                     <select name="selection" id="selectUser" placeholder="Tipo de Usuario:">
-                            <option value="0" selected disabled>Tipo de Usuario</option>
-                            <option value="false">Empleado</option>
-                            <option value="true">Gerente</option>
-                        </select>
+                        <option value="0" selected disabled>Tipo de Usuario</option>
+                        <option value="false">Empleado</option>
+                        <option value="true">Gerente</option>
+                    </select>
                     <br /><button className="buttonUser" onClick={consumir_register}>Ingresar</button>
 
                     <br /><NavLink className="linkUS" to="/">¿Tienes una cuenta?</NavLink>

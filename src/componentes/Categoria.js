@@ -30,8 +30,8 @@ class App extends Component {
             })
     }
 
-    validar (){
-        if (localStorage.getItem('superUser') == true){
+    validar = () => {
+        if (localStorage.getItem('superUser') === "true"){
             this.registrar_categoria()
         }else{
             this.notify()
@@ -112,7 +112,7 @@ class App extends Component {
                             <label className="input-label" >Subcategoria</label>
                         </div>
                         <div className="action">
-                            <button className="action-button" onClick={this.validar}>Guardar</button>
+                            <button className="action-button" onClick={() => this.validar()}>Guardar</button>
                         </div>
                     </div>
 

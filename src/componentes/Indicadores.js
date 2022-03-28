@@ -10,21 +10,21 @@ function App() {
     const notifyError = () => toast.error('No tienes los permisos para esto');
 
     const validar1 = () => {
-        if (localStorage.getItem('superUser') == true){
+        if (localStorage.getItem('superUser') === "true"){
             post_indicadores("CPC")
         }else{
             notifyError()
         }
     }
     const validar2 = () => {
-        if (localStorage.getItem('superUser') == true){
+        if (localStorage.getItem('superUser') === "true"){
             post_indicadores("CPP")
         }else{
             notifyError()
         }
     }
     const validar3 = () => {
-        if (localStorage.getItem('superUser') == true){
+        if (localStorage.getItem('superUser') === "true"){
             post_indicadores("BNC")
         }else{
             notifyError()
