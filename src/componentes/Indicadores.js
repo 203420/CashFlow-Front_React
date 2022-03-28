@@ -7,6 +7,29 @@ import axios from "axios";
 function App() {
 
     const notify = () => toast.success('Guardado exitosamente');
+    const notifyError = () => toast.error('No tienes los permisos para esto');
+
+    const validar1 = () => {
+        if (localStorage.getItem('superUser') == true){
+            post_indicadores("CPC")
+        }else{
+            notifyError()
+        }
+    }
+    const validar2 = () => {
+        if (localStorage.getItem('superUser') == true){
+            post_indicadores("CPP")
+        }else{
+            notifyError()
+        }
+    }
+    const validar3 = () => {
+        if (localStorage.getItem('superUser') == true){
+            post_indicadores("BNC")
+        }else{
+            notifyError()
+        }
+    }
 
     const post_indicadores = (t) => {
         if (t == "CPC") {
@@ -101,7 +124,7 @@ function App() {
                         <label className="input-label">$ Cantidad</label>
                     </div>
                     <div className="action">
-                        <button className="action-button" onClick={() => post_indicadores("CPC")}>Guardar</button>
+                        <button className="action-button" onClick={() => validar1()}>Guardar</button>
                     </div>
                 </div>
 
@@ -120,7 +143,7 @@ function App() {
                         <label className="input-label">$ Cantidad</label>
                     </div>
                     <div className="action">
-                        <button className="action-button" onClick={() => post_indicadores("CPP")}>Guardar</button>
+                        <button className="action-button" onClick={() => validar2()}>Guardar</button>
                     </div>
                 </div>
 
@@ -139,7 +162,7 @@ function App() {
                         <label className="input-label">$ Cantidad</label>
                     </div>
                     <div className="action">
-                        <button className="action-button" onClick={() => post_indicadores("BNC")}>Guardar</button>
+                        <button className="action-button" onClick={() => validar3()}>Guardar</button>
                     </div>
                 </div>
             </div>

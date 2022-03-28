@@ -20,7 +20,7 @@ function App() {
             email: document.getElementById('email').value,
             password: document.getElementById('passw1').value,
             password2: document.getElementById('passw2').value,
-            is_superuser: document.getElementById('select').value
+            is_superuser: document.getElementById('selectUser').value
         }
 
         console.log(document.getElementById('select').value)
@@ -52,7 +52,7 @@ function App() {
                     <input className="inputUser" type="password" name="password" placeholder="Contraseña" id="passw1" />
                     <label className="labelUser">Confirmar contraseña:</label>
                     <input className="inputUser" type="password" name="password2" placeholder="Contraseña" id="passw2" />
-                    <select name="selection" id="select" placeholder="Tipo de Usuario:">
+                    <select name="selection" id="selectUser" placeholder="Tipo de Usuario:">
                             <option value="0" selected disabled>Tipo de Usuario</option>
                             <option value="false">Empleado</option>
                             <option value="true">Gerente</option>

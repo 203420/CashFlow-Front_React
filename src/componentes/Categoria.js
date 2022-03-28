@@ -1,5 +1,6 @@
 import axios from "axios";
 import { NavLink } from "react-router-dom";
+import toast, { Toaster } from 'react-hot-toast';
 import '../estilos/Main.css';
 import { Component } from 'react';
 import Menu from '../img/menu.png';
@@ -27,6 +28,14 @@ class App extends Component {
             .catch(error => {
                 console.log(error.response);
             })
+    }
+
+    validar (){
+        if (localStorage.getItem('superUser') == true){
+            this.registrar_categoria()
+        }else{
+            this.notify()
+        }
     }
 
     registrar_categoria() {
@@ -58,9 +67,15 @@ class App extends Component {
         document.getElementById('background').style.display = "none"
     }
 
+    notify () {toast.error('No tienes los permisos para esto');}
+
     render() {
         return (
             <body>
+                <div><Toaster 
+                position="bottom-left"
+                reverseOrder={false}/>
+                </div>
                 <div id="background" onClick={this.ocultar_nav}></div>
                 <header id="headerMain">
                     <div>
@@ -97,7 +112,7 @@ class App extends Component {
                             <label className="input-label" >Subcategoria</label>
                         </div>
                         <div className="action">
-                            <button className="action-button" onClick={this.registrar_categoria}>Guardar</button>
+                            <button className="action-button" onClick={this.validar}>Guardar</button>
                         </div>
                     </div>
 

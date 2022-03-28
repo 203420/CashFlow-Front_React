@@ -23,6 +23,7 @@ function App () {
             .then(response => {
                 localStorage.setItem('token', response.data.token);
                 localStorage.setItem('user_id', response.data.user_id);
+                localStorage.setItem('superUser', response.data.is_superuser);
                 navigate('/menu',{replace:true});
             })
             .catch((error) => {

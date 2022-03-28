@@ -1,5 +1,6 @@
 import axios from "axios";
 import { NavLink, useNavigate } from "react-router-dom";
+import toast, { Toaster } from 'react-hot-toast';
 import '../estilos/Main.css';
 import { Component } from 'react';
 import React from "react";
@@ -28,6 +29,22 @@ class App extends React.Component {
         this.exportPDF = this.exportPDF.bind(this)
         this.exportIndicador = this.exportIndicador.bind(this)
     }
+
+    validar1 (){
+        if (localStorage.getItem('superUser') == true){
+            this.get_CPC()
+        }else{
+            this.notify()
+        }
+    }
+    validar2 (){
+        if (localStorage.getItem('superUser') == true){
+            this.get_flujo_salida()
+        }else{
+            this.notify()
+        }
+    }
+
 
     exportPDF = () => {
         const unit = "pt";
@@ -225,10 +242,15 @@ class App extends React.Component {
         document.getElementById('background').style.display = "none"
     }
 
+    notify () {toast.error('No tienes los permisos para esto');}
 
     render() {
         return (
             <body>
+                <div><Toaster 
+                position="bottom-left"
+                reverseOrder={false}/>
+                </div>
                 <div id="background" onClick={this.ocultar_nav}></div>
                 <header id="headerMain">
                     <div>
@@ -267,7 +289,7 @@ class App extends React.Component {
                             <option value="11">Noviembre</option>
                             <option value="12">Diciembre</option>
                         </select>
-                        <button class="buttonReport" id="1" onClick={this.get_CPC}>Generar PDF</button>
+                        <button class="buttonReport" id="1" onClick={this.validar1}>Generar PDF</button>
                         <label class="labelReport">Reporte de flujo:</label>
                         <select name="selection" id="selectFlujo" placeholder="Opcion:">
                             <option value="0" selected disabled>Mes</option>
@@ -284,7 +306,7 @@ class App extends React.Component {
                             <option value="11">Noviembre</option>
                             <option value="12">Diciembre</option>
                         </select>
-                        <button class="buttonReport" id="2" onClick={this.get_flujo_salida}>Generar PDF</button>
+                        <button class="buttonReport" id="2" onClick={this.validar2}>Generar PDF</button>
                     </div>
                 </div>
                 <img src={ImgReporte} alt="error" id="imgReport" />
