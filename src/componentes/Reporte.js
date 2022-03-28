@@ -67,11 +67,12 @@ class App extends React.Component {
     }
 
     get_flujo_salida() {
+        let mes = document.getElementById("selectFlujo").value
 
         axios
-            .get("http://localhost:8000/cashflow/reporte/flujo/salida", {
+            .get("http://localhost:8000/cashflow/reporte/flujo/salida/"+mes, {
                 headers: {
-                    'Content-Type': 'application/json',
+                    // 'Content-Type': 'application/json',
                     'Authorization': 'Token ' + localStorage.getItem('token'),
                 },
             })
@@ -80,17 +81,17 @@ class App extends React.Component {
                 this.get_flujo_entrada()
             })
             .catch(error => {
-                console.log("Error");
+                console.log("Error1");
             })
 
     }
 
     get_flujo_entrada() {
-
+        let mes = document.getElementById("selectFlujo").value
         axios
-            .get("http://localhost:8000/cashflow/reporte/flujo/entrada", {
+            .get("http://localhost:8000/cashflow/reporte/flujo/entrada2/"+mes, {
                 headers: {
-                    'Content-Type': 'application/json',
+                    // 'Content-Type': 'application/json',
                     'Authorization': 'Token ' + localStorage.getItem('token'),
                 },
             })
@@ -99,15 +100,15 @@ class App extends React.Component {
                 this.exportPDF()
             })
             .catch(error => {
-                console.log("Error");
+                console.log("Error2");
             })
 
     }
 
     get_CPC() {
-
+        let mes = document.getElementById("selectIndi").value
         axios
-            .get("http://localhost:8000/cashflow/reporte/indicador/cpc", {
+            .get("http://localhost:8000/cashflow/reporte/indicador/cpc/"+mes, {
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': 'Token ' + localStorage.getItem('token'),
@@ -125,9 +126,9 @@ class App extends React.Component {
     }
 
     get_CPP() {
-
+        let mes = document.getElementById("selectIndi").value
         axios
-            .get("http://localhost:8000/cashflow/reporte/indicador/cpp", {
+            .get("http://localhost:8000/cashflow/reporte/indicador/cpp/"+mes, {
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': 'Token ' + localStorage.getItem('token'),
@@ -145,9 +146,9 @@ class App extends React.Component {
     }
 
     get_BNC() {
-
+        let mes = document.getElementById("selectIndi").value
         axios
-            .get("http://localhost:8000/cashflow/reporte/indicador/bnc", {
+            .get("http://localhost:8000/cashflow/reporte/indicador/bnc/"+mes, {
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': 'Token ' + localStorage.getItem('token'),
@@ -251,8 +252,38 @@ class App extends React.Component {
                     <div class="forms-card3">
                         <h1 class="title2">Elegir opción</h1>
                         <label class="labelReport">Reporte de indicadores financieros:</label>
+                        <select name="selection" id="selectIndi" placeholder="Opcion:">
+                            <option value="0" selected disabled>Mes</option>
+                            <option value="01">Enero</option>
+                            <option value="02">Febrero</option>
+                            <option value="03">Marzo</option>
+                            <option value="04">Abril</option>
+                            <option value="05">Mayo</option>
+                            <option value="06">Junio</option>
+                            <option value="07">Julio</option>
+                            <option value="08">Agosto</option>
+                            <option value="09">Septiembre</option>
+                            <option value="10">Octubre</option>
+                            <option value="11">Noviembre</option>
+                            <option value="12">Diciembre</option>
+                        </select>
                         <button class="buttonReport" id="1" onClick={this.get_CPC}>Generar PDF</button>
                         <label class="labelReport">Reporte de flujo:</label>
+                        <select name="selection" id="selectFlujo" placeholder="Opcion:">
+                            <option value="0" selected disabled>Mes</option>
+                            <option value="01">Enero</option>
+                            <option value="02">Febrero</option>
+                            <option value="03">Marzo</option>
+                            <option value="04">Abril</option>
+                            <option value="05">Mayo</option>
+                            <option value="06">Junio</option>
+                            <option value="07">Julio</option>
+                            <option value="08">Agosto</option>
+                            <option value="09">Septiembre</option>
+                            <option value="10">Octubre</option>
+                            <option value="11">Noviembre</option>
+                            <option value="12">Diciembre</option>
+                        </select>
                         <button class="buttonReport" id="2" onClick={this.get_flujo_salida}>Generar PDF</button>
                     </div>
                 </div>

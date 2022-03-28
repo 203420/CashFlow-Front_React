@@ -19,18 +19,20 @@ function App() {
             username: document.getElementById('user').value,
             email: document.getElementById('email').value,
             password: document.getElementById('passw1').value,
-            password2: document.getElementById('passw2').value
+            password2: document.getElementById('passw2').value,
+            is_superuser: document.getElementById('select').value
         }
 
-        axios
-            .post("http://localhost:8000/cashflow/register", postData, requestOptions)
-            .then(response => {
-                alert("Registro exitoso")
-                navigate('/',{replace:true});
-            })
-            .catch((error) => {
-                console.log(error.response.data);
-            });
+        console.log(document.getElementById('select').value)
+        // axios
+        //     .post("http://localhost:8000/cashflow/register", postData, requestOptions)
+        //     .then(response => {
+        //         alert("Registro exitoso")
+        //         navigate('/',{replace:true});
+        //     })
+        //     .catch((error) => {
+        //         console.log(error.response.data);
+        //     });
     };
 
     return (
@@ -50,6 +52,11 @@ function App() {
                     <input className="inputUser" type="password" name="password" placeholder="Contraseña" id="passw1" />
                     <label className="labelUser">Confirmar contraseña:</label>
                     <input className="inputUser" type="password" name="password2" placeholder="Contraseña" id="passw2" />
+                    <select name="selection" id="select" placeholder="Tipo de Usuario:">
+                            <option value="0" selected disabled>Tipo de Usuario</option>
+                            <option value="false">Empleado</option>
+                            <option value="true">Gerente</option>
+                        </select>
                     <br /><button className="buttonUser" onClick={consumir_register}>Ingresar</button>
 
                     <br /><NavLink className="linkUS" to="/">¿Tienes una cuenta?</NavLink>

@@ -10,7 +10,7 @@ function App() {
 
     const logout = () => {
         localStorage.clear();
-        navigate('/',{replace:true});
+        navigate('/', { replace: true });
     }
 
     return (
@@ -21,34 +21,33 @@ function App() {
                     <button id="buttonMenu" onClick={logout}>Salir</button>
                 </div>
             </header>
-
             <div id="containerMenu">
                 <div className="optionMenu">
                     <NavLink className="linkMenu" to="/categorias">
-                        <img src={img1} className="imgMenu" id="ctg" alt="error"/>
+                        <img src={img1} className="imgMenu" id="ctg" alt="error" />
                         <span className="spanMenu">Agregar categorias</span>
-                        <br/><p>Permite registrar una categoria nueva y clasificarla</p>
+                        <br /><p>Permite registrar una categoria nueva y clasificarla</p>
                     </NavLink>
                 </div>
                 <div className="optionMenu">
                     <NavLink className="linkMenu" to="/flujo">
-                        <img src={img2} className="imgMenu" id="money" alt="error"/>
+                        <img src={img2} className="imgMenu" id="money" alt="error" />
                         <span className="spanMenu">Registrar flujo</span>
-                        <br/><p>Permite agregar un ingreso o gasto con su respectiva categoria</p>
+                        <br /><p>Permite agregar un ingreso o gasto con su respectiva categoria</p>
                     </NavLink>
                 </div>
                 <div className="optionMenu">
                     <NavLink className="linkMenu" to="/indicadores">
-                        <img src={img3} className="imgMenu" id="ind" alt="error"/>
+                        <img src={img3} className="imgMenu" id="ind" alt="error" />
                         <span className="spanMenu">Registrar indicadores</span>
-                        <br/><p>Permite registrar datos como cuentas por pagar, cobrar y bancos</p>
+                        <br /><p>Permite registrar datos como cuentas por pagar, cobrar y bancos</p>
                     </NavLink>
                 </div>
                 <div className="optionMenu">
                     <NavLink className="linkMenu" to="/reportes">
-                        <img src={img4} className="imgMenu" id="ind" alt="error"/>
+                        <img src={img4} className="imgMenu" id="ind" alt="error" />
                         <span className="spanMenu">Generar reportes</span>
-                        <br/><p>Permite generar reportes financieros con los datos del último mes</p>
+                        <br /><p>Permite generar reportes financieros con los datos del último mes</p>
                     </NavLink>
                 </div>
             </div>

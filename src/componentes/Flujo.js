@@ -3,6 +3,7 @@ import '../estilos/Main.css'
 import Menu from '../img/menu.png'
 import { Component } from 'react';
 import axios from "axios";
+import toast, { Toaster } from 'react-hot-toast';
 
 class App extends Component {
 
@@ -107,9 +108,33 @@ class App extends Component {
         return (x[0])
     }
 
+    eliminar_flujo(id) {
+        axios.delete("http://localhost:8000/cashflow/flujo/" + id, {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Token ' + localStorage.getItem('token'),
+            },
+        })
+            .then((response) => {
+                this.notify()
+                setTimeout(() => { window.location.reload();; }, 1000);
+            })
+            .catch((error) => {
+                console.log(error.response.data)
+            })
+    }
+
+    notify () {toast.success('Eliminado Correctamente');}
+
     render() {
         return (
             <body>
+
+                <div><Toaster
+                    position="bottom-left"
+                    reverseOrder={false} />
+                </div>
+
                 <div id="background" onClick={this.ocultar_nav}></div>
                 <header id="headerMain">
                     <div>
@@ -178,6 +203,7 @@ class App extends Component {
                                     <th>Cantidad</th>
                                     <th>Categoria</th>
                                     <th>Subcategoria</th>
+                                    <th>Opciones</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -188,6 +214,7 @@ class App extends Component {
                                         <td>{flujos.cantidad}</td>
                                         <td>{flujos.categoriaCat}</td>
                                         <td>{flujos.subcategoriaCat}</td>
+                                        <td><img src="https://cdn-icons-png.flaticon.com/512/1214/1214428.png" width="23px" onDoubleClick={() => this.eliminar_flujo(flujos.id)}></img></td>
                                     </tr>)
                                 }
                             </tbody>

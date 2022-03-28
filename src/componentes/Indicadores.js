@@ -42,8 +42,8 @@ function App() {
                 },
             })
             .then((response) => {
-                window.location.reload();
                 notify()
+                setTimeout(() => { window.location.reload(); }, 1000);
             })
             .catch((error) => {
                 console.log("Error")
