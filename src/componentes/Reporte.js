@@ -20,6 +20,8 @@ class App extends React.Component {
             CPP: [],
             CPC: [],
             BNC: [],
+            utilidad: [],
+            margen: []
         }
         this.get_flujo_entrada = this.get_flujo_entrada.bind(this)
         this.get_flujo_salida = this.get_flujo_salida.bind(this)
@@ -47,6 +49,23 @@ class App extends React.Component {
 
 
     exportPDF = () => {
+        let gastos1 = 0
+        let gastos2 = 0
+        let gastos3 = 0
+        let gastos4 = 0
+        let ingresos1 = 0
+        let ingresos2 = 0
+        let ingresos3= 0
+        let ingresos4 = 0
+        let utilidad1 = 0
+        let utilidad2 = 0
+        let utilidad3 = 0
+        let utilidad4 = 0
+        let margen1 = 0
+        let margen2 = 0
+        let margen3 = 0
+        let margen4 = 0
+
         const unit = "pt";
         const size = "A4"; // Use A1, A2, A3 or A4
         const orientation = "portrait"; // portrait or landscape
@@ -56,31 +75,93 @@ class App extends React.Component {
 
         doc.setFontSize(15);
 
-        const title = "Reporte de Flujos Financieros";
-        const headers = [["Flujo Salida", "Semana 1", "Semana 2", "Semana 3", "Semana 4", "Total"]];
-
+        const title = "Reporte de Categorias";
+        const headers = [["Gastos", "Semana 1", "Semana 2", "Semana 3", "Semana 4", "Total"]];
         const data = this.state.flujoSalida.map(flujoSalida => [flujoSalida.Salida, flujoSalida.Semana1, flujoSalida.Semana2, flujoSalida.Semana3, flujoSalida.Semana4, flujoSalida.Total]);
-
         let content = {
             startY: 50,
             head: headers,
             body: data
         };
 
-        const headers2 = [["Flujo Entrada", "Semana 1", "Semana 2", "Semana 3", "Semana 4", "Total"]];
-
+        const headers2 = [["Ingresos", "Semana 1", "Semana 2", "Semana 3", "Semana 4", "Total"]];
         const data2 = this.state.flujoEntrada.map(flujoSalida => [flujoSalida.Salida, flujoSalida.Semana1, flujoSalida.Semana2, flujoSalida.Semana3, flujoSalida.Semana4, flujoSalida.Total]);
-
         let content2 = {
-            startY: 1000,
+            startY: 150,
             head: headers2,
             body: data2
+        };
+
+        gastos1 = this.state.flujoSalida[2]["Semana1"]
+        gastos2 = this.state.flujoSalida[2]["Semana2"]
+        gastos3 = this.state.flujoSalida[2]["Semana3"]
+        gastos4 = this.state.flujoSalida[2]["Semana4"]
+
+        ingresos1 = this.state.flujoEntrada[2]["Semana1"]
+        ingresos2 = this.state.flujoEntrada[2]["Semana2"]
+        ingresos3 = this.state.flujoEntrada[2]["Semana3"]
+        ingresos4 = this.state.flujoEntrada[2]["Semana4"]
+
+        utilidad1 = ingresos1 - gastos1
+        utilidad2 = ingresos2 - gastos2
+        utilidad3 = ingresos3 - gastos3
+        utilidad4 = ingresos4 - gastos4
+
+        let utilidad = {
+            "Salida": "Total de Utilidad",
+            "Semana1": utilidad1,
+            "Semana2": utilidad2,
+            "Semana3": utilidad3,
+            "Semana4": utilidad4,
+        }
+
+        let utilidades = [utilidad]
+
+        this.setState({ utilidad: utilidades})
+        
+        const headers3 = [["Diferencia", "Semana 1", "Semana 2", "Semana 3", "Semana 4"]];
+        const data3 = this.state.utilidad.map(a => [a.Salida, a.Semana1, a.Semana2, a.Semana3, a.Semana4]);
+        let content3 = {
+            startY: 250,
+            head: headers3,
+            body: data3
+        };
+
+        margen1 = utilidad1/ingresos1
+        margen1 = (margen1)*(100)
+        margen2 = utilidad2/ingresos2
+        margen2 = (margen2)*(100)
+        margen3 = utilidad3/ingresos3
+        margen3 = (margen3)*(100)
+        margen4 = utilidad4/ingresos4
+        margen4 = (margen4)*(100)
+
+        let rentabilidad = {
+            "Salida": "Margen Rentabilidad",
+            "Semana1": Math.trunc(margen1)+"%",
+            "Semana2": Math.trunc(margen2)+"%",
+            "Semana3": Math.trunc(margen3)+"%",
+            "Semana4": Math.trunc(margen4)+"%",
+        }
+
+        let rentabilidades = [rentabilidad]
+
+        this.setState({ rentabilidad: rentabilidades})
+
+        const headers4 = [["Margen de Rentabilidad", "Semana 1", "Semana 2", "Semana 3", "Semana 4"]];
+        const data4 = this.state.rentabilidad.map(a => [a.Salida, a.Semana1, a.Semana2, a.Semana3, a.Semana4]);
+        let content4 = {
+            startY: 300,
+            head: headers4,
+            body: data4
         };
 
         doc.text(title, marginLeft, 40);
         doc.autoTable(content);
         doc.autoTable(content2);
-        doc.save("Reporte-Flujos-Financieros.pdf")
+        doc.autoTable(content3);
+        doc.autoTable(content4);
+        doc.save("Reporte Categorias.pdf")
     }
 
     get_flujo_salida() {
