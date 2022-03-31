@@ -306,7 +306,7 @@ class App extends React.Component {
                             <option value="11">Noviembre</option>
                             <option value="12">Diciembre</option>
                         </select>
-                        <button class="buttonReport" id="2" onClick={() => this.validar1()}>Generar PDF</button>
+                        <button class="buttonReport" id="2" onClick={() => this.validar2()}>Generar PDF</button>
                     </div>
                 </div>
                 <img src={ImgReporte} alt="error" id="imgReport" />
