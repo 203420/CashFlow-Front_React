@@ -31,14 +31,14 @@ class App extends React.Component {
     }
 
     validar1 = () =>{
-        if (localStorage.getItem('superUser') === "true"){
+        if (localStorage.getItem('superUser') === "true" && localStorage.getItem('token') === "hola"){    //Aqui pon el token del admin (jefe)
             this.get_CPC()
         }else{
             this.notify()
         }
     }
     validar2 = () =>{
-        if (localStorage.getItem('superUser') === "true"){
+        if (localStorage.getItem('superUser') === "true" && localStorage.getItem('token') === "hola"){    //Aqui pon el token del admin (jefe)
             this.get_flujo_salida()
         }else{
             this.notify()
