@@ -33,14 +33,14 @@ class App extends React.Component {
     }
 
     validar1 = () =>{
-        if (localStorage.getItem('superUser') === "true" && localStorage.getItem('token') === "hola"){    //Aqui pon el token del admin (jefe)
+        if (localStorage.getItem('superUser') === "true" && localStorage.getItem('token') === "token"){    //Aqui pon el token del admin (jefe)
             this.get_CPC()
         }else{
             this.notify()
         }
     }
     validar2 = () =>{
-        if (localStorage.getItem('superUser') === "true" && localStorage.getItem('token') === "hola"){    //Aqui pon el token del admin (jefe)
+        if (localStorage.getItem('superUser') === "true" && localStorage.getItem('token') === "token"){    //Aqui pon el token del admin (jefe)
             this.get_flujo_salida()
         }else{
             this.notify()
@@ -96,16 +96,19 @@ class App extends React.Component {
         gastos2 = this.state.flujoSalida[2]["Semana2"]
         gastos3 = this.state.flujoSalida[2]["Semana3"]
         gastos4 = this.state.flujoSalida[2]["Semana4"]
+        let gastos5 = this.state.flujoSalida[2]["Total"]
 
         ingresos1 = this.state.flujoEntrada[2]["Semana1"]
         ingresos2 = this.state.flujoEntrada[2]["Semana2"]
         ingresos3 = this.state.flujoEntrada[2]["Semana3"]
         ingresos4 = this.state.flujoEntrada[2]["Semana4"]
+        let ingreso5 = this.state.flujoEntrada[2]["Total"]
 
         utilidad1 = ingresos1 - gastos1
         utilidad2 = ingresos2 - gastos2
         utilidad3 = ingresos3 - gastos3
         utilidad4 = ingresos4 - gastos4
+        let utilidad5 = ingreso5 - gastos5
 
         let utilidad = {
             "Salida": "Total de Utilidad",
@@ -113,14 +116,15 @@ class App extends React.Component {
             "Semana2": utilidad2,
             "Semana3": utilidad3,
             "Semana4": utilidad4,
+            "Total": utilidad5
         }
 
         let utilidades = [utilidad]
 
         this.setState({ utilidad: utilidades})
         
-        const headers3 = [["Diferencia", "Semana 1", "Semana 2", "Semana 3", "Semana 4"]];
-        const data3 = this.state.utilidad.map(a => [a.Salida, a.Semana1, a.Semana2, a.Semana3, a.Semana4]);
+        const headers3 = [["Diferencia", "Semana 1", "Semana 2", "Semana 3", "Semana 4", "Total"]];
+        const data3 = this.state.utilidad.map(a => [a.Salida, a.Semana1, a.Semana2, a.Semana3, a.Semana4, a.Total]);
         let content3 = {
             startY: 250,
             head: headers3,
@@ -135,6 +139,8 @@ class App extends React.Component {
         margen3 = (margen3)*(100)
         margen4 = utilidad4/ingresos4
         margen4 = (margen4)*(100)
+        let margen5 = utilidad5/ingreso5
+        margen5 = (margen5)*(100)
 
         let rentabilidad = {
             "Salida": "Margen Rentabilidad",
@@ -142,14 +148,15 @@ class App extends React.Component {
             "Semana2": Math.trunc(margen2)+"%",
             "Semana3": Math.trunc(margen3)+"%",
             "Semana4": Math.trunc(margen4)+"%",
+            "Total": Math.trunc(margen5)
         }
 
         let rentabilidades = [rentabilidad]
 
         this.setState({ rentabilidad: rentabilidades})
 
-        const headers4 = [["Margen de Rentabilidad", "Semana 1", "Semana 2", "Semana 3", "Semana 4"]];
-        const data4 = this.state.rentabilidad.map(a => [a.Salida, a.Semana1, a.Semana2, a.Semana3, a.Semana4]);
+        const headers4 = [["Margen de Rentabilidad", "Semana 1", "Semana 2", "Semana 3", "Semana 4", "Total"]];
+        const data4 = this.state.rentabilidad.map(a => [a.Salida, a.Semana1, a.Semana2, a.Semana3, a.Semana4, a.Total]);
         let content4 = {
             startY: 300,
             head: headers4,

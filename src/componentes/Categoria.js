@@ -68,6 +68,23 @@ class App extends Component {
     }
 
     notify () {toast.error('No tienes los permisos para esto');}
+    notify2 () {toast.success('Eliminado Correctamente');}
+
+    eliminar_flujo(id) {
+        axios.delete("http://localhost:8000/cashflow/categoria/" + id, {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Token ' + localStorage.getItem('token'),
+            },
+        })
+            .then((response) => {
+                this.notify2()
+                setTimeout(() => { window.location.reload();; }, 1000);
+            })
+            .catch((error) => {
+                console.log(error.response.data)
+            })
+    }
 
     render() {
         return (
@@ -132,6 +149,7 @@ class App extends Component {
                                     this.state.categorias.map(categorias => <tr className="info-table" key={categorias.id}>
                                         <td>{categorias.categoria}</td>
                                         <td>{categorias.subcategoria}</td>
+                                        <td><img src="https://cdn-icons-png.flaticon.com/512/1214/1214428.png" width="23px" onDoubleClick={() => this.eliminar_flujo(categorias.id)}></img></td>
                                     </tr>)
                                 }
                             </tbody>
